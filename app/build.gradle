@@ -31,6 +31,9 @@ dependencies {
     compile 'microutils:kotlin.logging:1.2.1'
     // https://mvnrepository.com/artifact/org.slf4j/slf4j-android
     compile group: 'org.slf4j', name: 'slf4j-android', version: '1.7.21'
+
+    //anko
+    compile 'org.jetbrains.anko:anko-sdk15:0.8.2'
 }
 repositories {
     mavenCentral()
