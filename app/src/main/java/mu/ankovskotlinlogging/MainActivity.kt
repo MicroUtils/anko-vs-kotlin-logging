@@ -15,35 +15,16 @@ class MainActivity : AppCompatActivity(), AnkoLogger {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         test("android-logging", {Log.v(TAG, "This is logging of - android.util.Log logging")});
-        test("android-logging", {Log.v(TAG, "This is logging of - android.util.Log logging")});
-        test("android-logging", {Log.v(TAG, "This is logging of - android.util.Log logging")});
-        test("android-logging", {Log.v(TAG, "This is logging of - android.util.Log logging")});
-        test("android-logging", {Log.v(TAG, "This is logging of - android.util.Log logging")});
-        test("kotlin-logging", {logger.info ("This is logging of - kotlin-logging" )});
-        test("kotlin-logging", {logger.info ("This is logging of - kotlin-logging" )});
-        test("kotlin-logging", {logger.info ("This is logging of - kotlin-logging" )});
-        test("kotlin-logging", {logger.info ("This is logging of - kotlin-logging" )});
         test("kotlin-logging", {logger.info ("This is logging of - kotlin-logging" )});
         test("kotlin-logging-lazy", {logger.info {"This is logging of - kotlin-logging"}});
-        test("kotlin-logging-lazy", {logger.info {"This is logging of - kotlin-logging"}});
-        test("kotlin-logging-lazy", {logger.info {"This is logging of - kotlin-logging"}});
-        test("kotlin-logging-lazy", {logger.info {"This is logging of - kotlin-logging"}});
-        test("kotlin-logging-lazy", {logger.info {"This is logging of - kotlin-logging"}});
-        test("AnkoLogger", {info ("This is logging of - AnkoLogger" )});
-        test("AnkoLogger", {info ("This is logging of - AnkoLogger" )});
-        test("AnkoLogger", {info ("This is logging of - AnkoLogger" )});
-        test("AnkoLogger", {info ("This is logging of - AnkoLogger" )});
         test("AnkoLogger", {info ("This is logging of - AnkoLogger" )});
         test("AnkoLogger-lazy", {info {"This is logging of - AnkoLogger"}});
-        test("AnkoLogger-lazy", {info {"This is logging of - AnkoLogger"}});
-        test("AnkoLogger-lazy", {info {"This is logging of - AnkoLogger"}});
-        test("AnkoLogger-lazy", {info {"This is logging of - AnkoLogger"}});
-        test("AnkoLogger-lazy", {info {"This is logging of - AnkoLogger"}});
+        ChildForLogging().testLog()
     }
 
     private fun test(testName: String, func: ()-> Unit): Unit {
         val st = Stopwatch.createStarted()
-        for (i in 1..1000) {
+        for (i in 1..10) {
             func.invoke()
         }
         Log.e(TAG, "test-timing: '$testName' took ${st}")
@@ -53,3 +34,8 @@ class MainActivity : AppCompatActivity(), AnkoLogger {
     companion object: KLogging()
     private val TAG = "MainActivity"
 }
+
+open class ParentForLogging: AnkoLogger {
+    fun testLog() = {info { "lets see the class name" }}
+}
+class ChildForLogging: ParentForLogging()
